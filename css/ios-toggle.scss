@@ -1,0 +1,87 @@
+$green: #4CD964;
+$white: #fff;
+$grey: #cdcdcd;
+$shadow: rgba(0,0,0,.3);
+$light-grey: #f0f0f0;
+
+$el-border: 2px;
+$el-height: 36px;
+$el-width: 64px;
+
+
+* {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+input {
+  &.ios-toggle {
+    &[type="checkbox"] {
+      display: none;
+
+      & ~ label {
+        &::before {
+          background-color: $white;
+          border-radius: ($el-height - $el-border) / 2;
+          box-shadow: 0 2px 2px $shadow;
+          content: '';
+          cursor: pointer;
+          height: $el-height - ($el-border * 2);
+          position: absolute;
+          right: $el-width - ($el-height - $el-border);
+          top: $el-border;
+          transition: .25s width, .25s right;
+          width: $el-height - ($el-border * 2);
+        }
+
+        &::after {
+          background-color: $white;
+          border: $el-border solid $grey;
+          border-radius: $el-height / 2;
+          box-shadow: inset 0 0 0 0 $light-grey;
+          content: '';
+          height: $el-height;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transition: .2s background-color, .2s border, .4s box-shadow;
+          width: $el-width;
+          z-index: -1;
+        }
+      }
+
+      &:active {
+        & ~ label {
+          &::before {
+            right: ($el-width / 3) - $el-border;
+            width: ($el-width * 2) / 3;
+          }
+
+          &::after {
+            box-shadow: inset 0 0 0 $el-width $light-grey;
+          }
+        }
+      }
+
+      &:checked {
+        & ~ label {
+          &::before {
+            right: $el-border;
+          }
+
+          &::after {
+            box-shadow: inset 0 0 0 $el-width $green;
+            border: $el-border solid $green;
+          }
+        }
+
+        &:active {
+          & ~ label {
+            &::before {
+              width: ($el-width * 2) / 3;
+            }
+          }
+        }
+      }
+    }
+  }
+}
